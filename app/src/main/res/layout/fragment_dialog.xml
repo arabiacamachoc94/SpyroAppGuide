@@ -1,0 +1,22 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <VideoView
+        android:id="@+id/videoViewEasterEgg"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_gravity="center"/>
+    <Button
+        android:id="@+id/btnOmitir2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="20dp"
+        android:text="Omitir"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/purple"
+        android:backgroundTint="@color/grey_transparent"/>
+</FrameLayout>

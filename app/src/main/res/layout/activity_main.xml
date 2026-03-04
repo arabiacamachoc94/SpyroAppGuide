@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- NavHostFragment para manejar la navegación entre fragmentos -->
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/navHostFragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
 
-    <!-- BottomNavigationView para la navegación inferior -->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navView"
         android:layout_width="0dp"
@@ -25,6 +25,72 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"/>
 
+    <!-- Overlay para la guía -->
+    <FrameLayout
+        android:id="@+id/overlayGuia"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/grey_transparent"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Bocadillo -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/speechBubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/purple_transparent"
+            app:cardCornerRadius="40dp"
+            app:cardElevation="2dp"
+            app:layout_constraintBottom_toTopOf="@id/navView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/tvSpeedBubble"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_bocadillo"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="10dp"/>
+
+                <ImageButton
+                    android:id="@+id/btnNext"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/cicle_background"
+                    android:elevation="6dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Botón Omitir -->
+        <Button
+            android:id="@+id/btnOmitir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/omitir"
+            android:background="@color/white_transparent"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_gravity="end|top"
+            android:padding="8dp"/>
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

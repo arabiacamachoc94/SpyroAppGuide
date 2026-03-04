@@ -10,7 +10,8 @@ import dam.pmdm.spyrothedragon.R
 import dam.pmdm.spyrothedragon.models.World
 
 class WorldsAdapter(
-    private val list: List<World>
+    private val list: List<World>,
+    private val contarClick: (position: Int) -> Unit
 ) : RecyclerView.Adapter<WorldsAdapter.WorldsViewHolder>() {
 
     private val worldImages = mapOf(
@@ -37,6 +38,11 @@ class WorldsAdapter(
 
         val drawableRes = worldImages[world.image] ?: R.drawable.placeholder
         holder.imageImageView.setImageResource(drawableRes)
+
+        //Contamos los clicks en el botón Mundos
+        holder.itemView.setOnClickListener {
+            contarClick(position)
+        }
     }
 
     override fun getItemCount(): Int = list.size

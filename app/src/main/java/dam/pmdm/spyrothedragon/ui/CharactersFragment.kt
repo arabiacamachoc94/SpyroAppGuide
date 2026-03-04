@@ -14,6 +14,11 @@ import dam.pmdm.spyrothedragon.models.Character
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
 import java.io.InputStream
+import android.app.Dialog
+import android.animation.ValueAnimator
+import android.animation.ArgbEvaluator
+import android.graphics.Color
+import android.widget.Button
 
 class CharactersFragment : Fragment() {
 
@@ -23,6 +28,8 @@ class CharactersFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CharactersAdapter
     private val charactersList = mutableListOf<Character>()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,11 +41,17 @@ class CharactersFragment : Fragment() {
 
         recyclerView = binding.recyclerViewCharacters
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = CharactersAdapter(charactersList)
+        adapter = CharactersAdapter(charactersList) {
+
+            showMagicAnimation()
+
+        }
         recyclerView.adapter = adapter
 
         loadCharacters()
         return binding.root
+
+
     }
 
     override fun onDestroyView() {
@@ -85,4 +98,40 @@ class CharactersFragment : Fragment() {
             e.printStackTrace()
         }
     }
+    private fun showMagicAnimation() {
+
+        val dialog = Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen)
+        dialog.setContentView(R.layout.dialog_ripto)
+
+        val magicView = dialog.findViewById<RiptoMagicView>(R.id.magicView)
+        val btnOmitir = dialog.findViewById<Button>(R.id.btnOmitir3)
+
+
+
+        btnOmitir.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+
+        val animator = ValueAnimator.ofFloat(0f, 400f)
+        animator.duration = 2000
+        animator.repeatCount = ValueAnimator.INFINITE
+        animator.repeatMode = ValueAnimator.REVERSE
+
+        animator.addUpdateListener {
+            val value = it.animatedValue as Float
+            magicView.updateRadius(value)
+
+            val color = ArgbEvaluator().evaluate(
+                value / 400f,
+                Color.CYAN,
+                Color.MAGENTA
+            ) as Int
+            magicView.updateColor(color)
+        }
+
+        animator.start()
+}
+
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple_transparent">
+
+    <TextView
+        android:id="@+id/tvTittleEaster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="40dp"
+        android:text="@string/easter_egg"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+
+    <dam.pmdm.spyrothedragon.ui.RiptoMagicView
+        android:id="@+id/magicView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <Button
+        android:id="@+id/btnOmitir3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Omitir"
+        android:textSize="18sp"
+        android:layout_gravity="bottom|center"
+        android:background="@color/transparent"
+        android:layout_marginBottom="20dp"/>
+
+</FrameLayout>

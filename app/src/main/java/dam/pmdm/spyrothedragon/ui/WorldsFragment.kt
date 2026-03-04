@@ -14,6 +14,7 @@ import dam.pmdm.spyrothedragon.models.World
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
 import java.io.InputStream
+import dam.pmdm.spyrothedragon.VideoEasterEggFragment
 
 class WorldsFragment : Fragment() {
 
@@ -23,6 +24,9 @@ class WorldsFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: WorldsAdapter
     private val worldsList = mutableListOf<World>()
+
+    private var lastClick = -1
+    private var clickCounter = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +38,19 @@ class WorldsFragment : Fragment() {
 
         recyclerView = binding.recyclerViewWorlds
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = WorldsAdapter(worldsList)
+        adapter = WorldsAdapter(worldsList){ position ->
+            // Lógica del Easter Egg
+            if (lastClick == position) {
+                clickCounter++
+            } else {
+                lastClick = position
+                clickCounter = 1
+            }
+
+            if (clickCounter == 3) {
+                clickCounter = 0
+                showEasterEggVideo()
+            }}
         recyclerView.adapter = adapter
 
         loadWorlds()
@@ -84,5 +100,8 @@ class WorldsFragment : Fragment() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+    private fun showEasterEggVideo() {
+        VideoEasterEggFragment().show(parentFragmentManager, "videoEasterEgg")
     }
 }
