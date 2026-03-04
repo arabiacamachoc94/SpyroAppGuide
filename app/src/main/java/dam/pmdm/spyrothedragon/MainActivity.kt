@@ -133,7 +133,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (activeGuide) return true  // Bloquear todo durante la guía
+        if (activeGuide) return true  // Bloquear  durante la guía
         return if (item.itemId == R.id.action_info) {
             showInfoDialog()
             true
